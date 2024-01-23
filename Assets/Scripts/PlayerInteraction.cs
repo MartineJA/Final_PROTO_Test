@@ -84,7 +84,7 @@ public class PlayerInteraction : MonoBehaviour
 
         // si on appuie sur les bons boutons, la porte s'ouvre
         if (boutons[0].isOnUse && boutons[2].isOnUse && !boutons[1].isOnUse) { ManageMyEvents.NotifySolutionFound(); }
-        if (boutons[3].isOnUse) { ManageMyEvents.NotifySolutionFound(); }
+        if (boutons[3].isOnUse) { ManageMyEvents.NotifyTutoDoor(); }
 
 
     }

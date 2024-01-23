@@ -10,6 +10,7 @@ TagManager:
   - Body
   - Racines
   - Interaction
+  - Interrupteur
   layers:
   - Default
   - TransparentFX

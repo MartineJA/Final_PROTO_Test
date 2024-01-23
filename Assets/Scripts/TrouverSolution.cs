@@ -7,8 +7,8 @@ public class TrouverSolution : MonoBehaviour
 {
     //public GameObject[] boutonsActivables;
 
-    
 
+    
 
     private void OnEnable()
     {
@@ -24,10 +24,11 @@ public class TrouverSolution : MonoBehaviour
     void BonneCombinaison()
     {          
             Debug.Log("C'est la bonne combinaison");
-            
+           
             
             // jouer un son
-            // changer de caméra
+            // changer de caméra avec les priorités de cam
+            
             // ouvrir la porte
             // revenir à la première caméra
             
