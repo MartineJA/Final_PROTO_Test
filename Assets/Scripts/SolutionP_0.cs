@@ -6,7 +6,7 @@ public class SolutionP_0 : MonoBehaviour
 {
 
     [SerializeField] private GameObject door;
-    [SerializeField] private AudioSource m_audioToStart;
+    //[SerializeField] private AudioSource m_audioToStart;
     //[SerializeField] private AudioSource m_audioToStop;
     //[SerializeField] private float speed = 0.5f;
 
@@ -38,7 +38,7 @@ public class SolutionP_0 : MonoBehaviour
 
 
         // jouer un son
-        m_audioToStart.Play();
+        //m_audioToStart.Play();
 
 
 
