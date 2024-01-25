@@ -17,12 +17,16 @@ public class ManageMyEvents : MonoBehaviour
     public static event MyDelegate OnPorteFacile;
     public static event MyDelegate OnTutoDoor;
 
+   
+
     public static void NotifyButtonPushed() {  OnButtonPushed?.Invoke(); }
     public static void NotifySolutionFound() {  OnSolutionFound?.Invoke(); }
     public static void NotifyBadAnswer() {  OnBadAnswer?.Invoke(); }
 
     public static void NotifyTutoDoor() {  OnTutoDoor?.Invoke(); }
     public static void NotifyPorteFacile() { OnPorteFacile?.Invoke(); }
+
+   
 
 
 }
