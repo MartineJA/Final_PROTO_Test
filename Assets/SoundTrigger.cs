@@ -18,10 +18,9 @@ public class SoundTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        m_AudioSource.volume = 0.4f;
+        m_AudioSource.Play();
+
     }
-
-
 
 
 

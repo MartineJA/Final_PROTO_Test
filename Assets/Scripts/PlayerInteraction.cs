@@ -37,6 +37,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
     [SerializeField] private ObjetInteractable[] boutons;
+    [SerializeField] private ObjetInteractable[] boutonsP0;
     [SerializeField] private ObjetInteractable[] boutonsP1;
    
 
@@ -82,19 +83,28 @@ public class PlayerInteraction : MonoBehaviour
         //button.number += 1; obsolète
 
 
-
-
         // si on appuie sur les bons boutons, la porte s'ouvre
+
+        // porte tuto
+        if (boutons[0].isOnUse) { ManageMyEvents.NotifyTutoDoor(); }
+
+
+
+        // porte facile
+        if (!boutonsP0[0].isOnUse && boutonsP0[1].isOnUse && boutonsP0[2].isOnUse) { ManageMyEvents.NotifyPorteFacile(); }
+
+
         // plus long if de ma vie : *-- **- **- *--
+        // porte difficile
         if (boutonsP1[0].isOnUse && !boutonsP1[1].isOnUse && !boutonsP1[2].isOnUse &&
             boutonsP1[3].isOnUse && boutonsP1[4].isOnUse && !boutonsP1[5].isOnUse &&
             boutonsP1[6].isOnUse && boutonsP1[7].isOnUse && !boutonsP1[8].isOnUse &&
             boutonsP1[9].isOnUse && !boutonsP1[10].isOnUse && !boutonsP1[11].isOnUse) 
             { ManageMyEvents.NotifySolutionFound(); }
 
+        
 
-
-        if (boutons[0].isOnUse) { ManageMyEvents.NotifyTutoDoor(); }
+        
 
 
     }

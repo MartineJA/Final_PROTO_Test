@@ -50,7 +50,7 @@ public class SolutionP_0 : MonoBehaviour
 
 
 
-        Debug.Log("open door");
+        Debug.Log("open première porte");
     }
 
 

@@ -14,7 +14,7 @@ public class ManageMyEvents : MonoBehaviour
     public static event MyDelegate OnButtonPushed;
     public static event MyDelegate OnSolutionFound;
     public static event MyDelegate OnBadAnswer;
-
+    public static event MyDelegate OnPorteFacile;
     public static event MyDelegate OnTutoDoor;
 
     public static void NotifyButtonPushed() {  OnButtonPushed?.Invoke(); }
@@ -22,6 +22,7 @@ public class ManageMyEvents : MonoBehaviour
     public static void NotifyBadAnswer() {  OnBadAnswer?.Invoke(); }
 
     public static void NotifyTutoDoor() {  OnTutoDoor?.Invoke(); }
+    public static void NotifyPorteFacile() { OnPorteFacile?.Invoke(); }
 
 
 }
