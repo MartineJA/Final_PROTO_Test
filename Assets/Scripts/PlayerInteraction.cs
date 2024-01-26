@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 
 /// <summary>
@@ -33,9 +34,10 @@ public class PlayerInteraction : MonoBehaviour
     Camera cam;
 
 
-    
 
 
+
+    [Header("Liste des boutons par zone")]
     [SerializeField] private ObjetInteractable[] boutons;
     [SerializeField] private ObjetInteractable[] boutonsP0;
     [SerializeField] private ObjetInteractable[] boutonsP1;
@@ -49,6 +51,7 @@ public class PlayerInteraction : MonoBehaviour
         m_input = GetComponent<PlayerInput>();
         m_interagirAction = m_input.actions["Interagir"];
         cam = Camera.main;
+        
     }
 
 
@@ -56,6 +59,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
     }
+
+
+
+
     private void OnEnable()
     {
         m_interagirAction.performed += Interaction;
@@ -91,7 +98,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
         // porte facile
-        if (!boutonsP0[0].isOnUse && boutonsP0[1].isOnUse && boutonsP0[2].isOnUse) { ManageMyEvents.NotifyPorteFacile(); }  else {  ManageMyEvents.NotifyBadAnswer(); }
+        if (!boutonsP0[0].isOnUse && boutonsP0[1].isOnUse && boutonsP0[2].isOnUse && !boutonsP0[3].isOnUse) { ManageMyEvents.NotifyPorteFacile(); }  else {  ManageMyEvents.NotifyBadAnswer(); }
 
 
         // plus long if de ma vie : *-- **- **- *--
