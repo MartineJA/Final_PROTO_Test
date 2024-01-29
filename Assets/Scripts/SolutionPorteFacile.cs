@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+
+/// <summary>
+/// Coroutine : https://docs.unity3d.com/ScriptReference/WaitForSeconds.html
+/// </summary>
 public class SolutionPorteFacile : MonoBehaviour
 {
 
@@ -14,21 +18,22 @@ public class SolutionPorteFacile : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera vCam;
 
+
     [SerializeField]
     private int camPriority = 10;
 
     private void OnEnable()
     {
-        ManageMyEvents.OnPorteFacile += OpenDoor;
+        ManageMyEvents.OnPorteFacile += OpenEasyDoor;
     }
 
 
     private void OnDisable()
     {
-        ManageMyEvents.OnPorteFacile -= OpenDoor;
+        ManageMyEvents.OnPorteFacile -= OpenEasyDoor;
     }
 
-    private void OpenDoor()
+    private void OpenEasyDoor()
     {
 
         transform.position = Vector3.up;
@@ -59,7 +64,12 @@ public class SolutionPorteFacile : MonoBehaviour
 
 
         Debug.Log("open porte facile");
+        
+        
+        
     }
+
+
 
 
 }

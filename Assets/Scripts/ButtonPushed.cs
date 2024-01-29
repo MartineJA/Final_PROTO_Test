@@ -17,9 +17,9 @@ using UnityEngine.UIElements;
 
 public class ButtonPushed : MonoBehaviour
 {
-    //[SerializeField]
-    //private AudioSource src;
-
+    [SerializeField] private AudioSource src;
+    
+    
 
 
 
@@ -36,8 +36,10 @@ public class ButtonPushed : MonoBehaviour
     void AppuiBouton()
     {
         UnityEngine.Debug.Log(gameObject.name + " appuie sur un bouton");
-        //src.Play();
-      
+        src.Play();
+
+       
+
     }
 
 

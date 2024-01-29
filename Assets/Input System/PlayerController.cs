@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
+
+
 /// <summary>
 ///  Ce script permet de contrôler le Player  : mouvements, animation, et inputs
 ///  Sources: 
@@ -60,6 +63,13 @@ public class PlayerController : MonoBehaviour
     bool isInteracted = false;
 
 
+
+    private FloorDetection m_floordetection;
+    [SerializeField] private float offset = 1f;
+
+
+
+
     #endregion
 
 
@@ -78,12 +88,14 @@ public class PlayerController : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
 
+        m_floordetection = GetComponentInChildren<FloorDetection>();
 
     }
 
     void Update()
     {
         Interaction();
+       
 
         // Marche Basique
         groundedPlayer = controller.isGrounded;
@@ -125,6 +137,10 @@ public class PlayerController : MonoBehaviour
         // Animation
 
 
+
+        //Floor detection
+        
+
     }
 
     private void Interaction()
@@ -154,6 +170,16 @@ public class PlayerController : MonoBehaviour
         {
             isInteracted = false;
         }
+
+
     }
 
+    // obsolète:
+    private void StickToGround()
+    {
+        Vector3 averagePosition = m_floordetection.AverageHeight();
+        controller.center = new Vector3(controller.center.x, averagePosition.y, controller.center.x) ;
+
+        Debug.Log(averagePosition);
+    }
 }

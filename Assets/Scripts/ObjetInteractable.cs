@@ -16,8 +16,11 @@ public class ObjetInteractable : MonoBehaviour, IUsable
     [SerializeField]
     private UnityEvent _offUse;
 
-    public bool isOnUse;
 
+
+    public int iD;
+    public bool isOnUse;
+    
     UnityEvent IUsable.onUse { 
         get => _onUse; 
         set => _onUse = value; }
@@ -28,7 +31,7 @@ public class ObjetInteractable : MonoBehaviour, IUsable
         {
             _offUse.Invoke();
         }
-        else
+        else 
         {
             _onUse.Invoke();
         }

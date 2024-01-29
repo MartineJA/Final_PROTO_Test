@@ -14,10 +14,12 @@ public class ManageMyEvents : MonoBehaviour
     public static event MyDelegate OnButtonPushed;
     public static event MyDelegate OnSolutionFound;
     public static event MyDelegate OnBadAnswer;
-    public static event MyDelegate OnPorteFacile;
+    
     public static event MyDelegate OnTutoDoor;
+    public static event MyDelegate OnPorteFacile;
+    public static event MyDelegate OnPorteMoyenne;
 
-   
+
 
     public static void NotifyButtonPushed() {  OnButtonPushed?.Invoke(); }
     public static void NotifySolutionFound() {  OnSolutionFound?.Invoke(); }
@@ -25,8 +27,9 @@ public class ManageMyEvents : MonoBehaviour
 
     public static void NotifyTutoDoor() {  OnTutoDoor?.Invoke(); }
     public static void NotifyPorteFacile() { OnPorteFacile?.Invoke(); }
+    public static void NotifyPorteMoyenne() { OnPorteMoyenne?.Invoke(); }
 
-   
+
 
 
 }
