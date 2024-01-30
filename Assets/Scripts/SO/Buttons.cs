@@ -8,8 +8,8 @@ using UnityEngine;
 public class Buttons : ScriptableObject
 {
     public int number = 0;
-    
-    
+
+
 
 
 

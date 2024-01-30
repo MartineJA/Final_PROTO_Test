@@ -19,6 +19,8 @@ public class ManageMyEvents : MonoBehaviour
     public static event MyDelegate OnPorteFacile;
     public static event MyDelegate OnPorteMoyenne;
 
+    public static event MyDelegate OnSounds;
+    public static event MyDelegate OnReceive;
 
 
     public static void NotifyButtonPushed() {  OnButtonPushed?.Invoke(); }
@@ -29,7 +31,8 @@ public class ManageMyEvents : MonoBehaviour
     public static void NotifyPorteFacile() { OnPorteFacile?.Invoke(); }
     public static void NotifyPorteMoyenne() { OnPorteMoyenne?.Invoke(); }
 
-
+    public static void NotifySoundsToActivate() { OnSounds?.Invoke(); }
+    public static void NotifyReceive() { OnReceive?.Invoke(); }
 
 
 }

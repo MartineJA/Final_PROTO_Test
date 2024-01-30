@@ -10,7 +10,7 @@ using Cinemachine;
 public class CamTrigger : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera vCam;
-    [SerializeField] private int camPriority = 10;
+    
 
 
     [SerializeField] ObjetInteractable[] bouton;

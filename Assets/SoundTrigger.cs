@@ -8,10 +8,10 @@ using UnityEngine;
 /// </summary>
 public class SoundTrigger : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource m_AudioSource;
+    
+    public AudioSource m_AudioSource;
 
-
+    public bool hasBeenListened;
 
 
 
@@ -19,7 +19,7 @@ public class SoundTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         m_AudioSource.Play();
-
+        hasBeenListened = true;
     }
 
 

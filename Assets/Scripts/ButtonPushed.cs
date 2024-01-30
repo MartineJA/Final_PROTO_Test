@@ -35,7 +35,7 @@ public class ButtonPushed : MonoBehaviour
 
     void AppuiBouton()
     {
-        UnityEngine.Debug.Log(gameObject.name + " appuie sur un bouton");
+        //UnityEngine.Debug.Log(gameObject.name + " appuie sur un bouton");
         src.Play();
 
        

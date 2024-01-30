@@ -34,17 +34,21 @@ public class PlayerInteraction : MonoBehaviour
 
     Camera cam;
 
-    
 
-    
+    bool porte2B = false;
+    bool porte2A = false;
+
 
     [Header("Liste des boutons par pièce")]
     [SerializeField] private ObjetInteractable boutons;
     [SerializeField] private ObjetInteractable[] boutonsP0;   
     [SerializeField] private ObjetInteractable[] boutonsP1;
 
-    // [SerializeField] private ObjetInteractable[] boutonsP2;
+    [SerializeField] private ObjetInteractable[] boutonsP2a;
+    [SerializeField] private ObjetInteractable[] boutonsP2b;
 
+
+    [SerializeField] private SoundTrigger[] sound;
 
 
 
@@ -55,7 +59,7 @@ public class PlayerInteraction : MonoBehaviour
         m_input = GetComponent<PlayerInput>();
         m_interagirAction = m_input.actions["Interagir"];
         cam = Camera.main;
-        
+        foreach(SoundTrigger s in sound) { GetComponentInChildren<AudioSource>(); }
     }
 
 
@@ -87,24 +91,30 @@ public class PlayerInteraction : MonoBehaviour
 
         if (!hit.transform.TryGetComponent(out IUsable interactable)) return;
         interactable.Use();
-        Debug.Log("Interaction");
+        //Debug.Log("Interaction");
 
         ManageMyEvents.NotifyButtonPushed();
         
 
-        // si on appuie sur les bons boutons, la porte s'ouvre
+        // ********************** si on appuie sur les bons boutons, la porte s'ouvre
 
-        // porte tuto
+        // Porte tuto
         if (boutons.isOnUse) { ManageMyEvents.NotifyTutoDoor(); } 
 
-        // porte facile
+        // Porte facile
         if (!boutonsP0[0].isOnUse && boutonsP0[1].isOnUse && boutonsP0[2].isOnUse && !boutonsP0[3].isOnUse) { ManageMyEvents.NotifyPorteFacile(); }
 
-        // porte moyenne
-        //if (boutonsP1[0].isOnUse && !boutonsP1[1].isOnUse && boutonsP1[2].isOnUse && !boutonsP1[3].isOnUse) { ManageMyEvents.NotifyPorteMoyenne(); }
+
+
+
         PorteMoyenne();
-        
+        PorteDifficileA();
        
+
+       
+
+
+
 
 
         // plus long if de ma vie : *-- **- **- *--
@@ -119,62 +129,67 @@ public class PlayerInteraction : MonoBehaviour
 
               { ManageMyEvents.NotifySolutionFound(); }*/
 
-       
+
 
     }
 
+    
+
+   
     void PorteMoyenne()
     {
-        boutonsP1[0].iD = 0;
-        boutonsP1[1].iD = 1;
-        boutonsP1[2].iD = 2;
-        boutonsP1[3].iD = 3;
+        if (sound[0].hasBeenListened && sound[1].hasBeenListened)
+        {
+            Debug.Log("les sons ont été entendus");
+            
+
+            if (boutonsP1[0].isOnUse) { Debug.Log("sound01"); sound[0].m_AudioSource.Play(); }
+            if (boutonsP1[1].isOnUse) { Debug.Log("sound02"); sound[1].m_AudioSource.Play(); }
 
 
-        List<int> array = new List<int>() { -1, -1, -1 };
+
+            if (boutonsP1[0].isOnUse && boutonsP1[1].isOnUse)
+               { ManageMyEvents.NotifyPorteMoyenne(); }
+
+        }
+        else Debug.Log("vous devriez écouter autour de vous");
+
+    }
+
+
+    void PorteDifficileA()
+    {
 
 
 
+        // première ligne:
+        if (!boutonsP2a[0].isOnUse && boutonsP2a[1].isOnUse && !boutonsP2a[2].isOnUse && boutonsP2a[3].isOnUse) porte2A = true;
+        // première ligne:
+        if (!boutonsP2b[0].isOnUse && !boutonsP2b[1].isOnUse && boutonsP2b[2].isOnUse && boutonsP2b[3].isOnUse) porte2B = true;
 
-        int[] solution = new int[] { boutonsP1[2].iD, boutonsP1[0].iD};
-
+        if (porte2A && porte2B) { ManageMyEvents.NotifySolutionFound(); Debug.Log("porte ouvert"); }
         
 
 
 
-        foreach (ObjetInteractable o in boutonsP1)
+    }
 
+      void PorteDifficileB()
+    {
+        
+
+        if (sound[2].hasBeenListened && sound[3].hasBeenListened)
         {
-            if (o.isOnUse)
-            {
-
-                array.Remove(0);
-                Debug.Log(o.iD);
-                array.Add(o.iD);
-
-                array[0] = array[1];
-                array[1] = array[2];
-                array[3] = array[3];
-                array[3] = o.iD;
-
-                Debug.Log(array.ElementAt(0));
-                Debug.Log(array.ElementAt(1));
-                Debug.Log(array.ElementAt(2));
-                Debug.Log(array.ElementAt(3));
+            if (boutonsP2b[3].isOnUse) { Debug.Log("sound01"); sound[2].m_AudioSource.Play(); }
+            if (boutonsP2b[2].isOnUse) { Debug.Log("sound02"); sound[3].m_AudioSource.Play(); }
 
 
-
-                Debug.Log("array count    " + array.Count);
-                
-
-            }
+            if (boutonsP2b[3].isOnUse && boutonsP2b[2].isOnUse && !boutonsP2b[0].isOnUse && !boutonsP2b[1].isOnUse) 
+            porte2B = true;
 
         }
-
-
-
-
     }
+
 
 
 
