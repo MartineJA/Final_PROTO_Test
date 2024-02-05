@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction hitAction;
+    //private InputAction hitAction;
     private InputAction interagirAction;
 
     [SerializeField]
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
-        hitAction = playerInput.actions["Hit"];
+        //hitAction = playerInput.actions["Hit"];
         interagirAction = playerInput.actions["Interagir"];
 
         animator = GetComponentInChildren<Animator>();
@@ -145,10 +145,10 @@ public class PlayerController : MonoBehaviour
 
     private void Interaction()
     {
-        if(hitAction.triggered && isInteracted)
+       /* if(hitAction.triggered && isInteracted)
         {
             Debug.Log("frapper");
-        }
+        }*/
 
      /*   if (interagirAction.triggered)
         {

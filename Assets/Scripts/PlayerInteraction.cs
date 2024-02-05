@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using System;
 using System.Linq;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 /// <summary>
 /// Script d'après:
@@ -29,15 +31,24 @@ public class PlayerInteraction : MonoBehaviour
 
     PlayerInput m_input;
     InputAction m_interagirAction;
+    InputAction m_InventaireAction;
+
+    DefaultInputActions m_inputUI;
+    InputAction m_submitAction;
 
     RaycastHit hit;
 
     Camera cam;
 
+    public GameObject inventoryUI;
+
+    [SerializeField]
+    private Item item;
+
 
     bool porte2B = false;
     bool porte2A = false;
-
+    bool goodZone;
 
     [Header("Liste des boutons par pièce")]
     [SerializeField] private ObjetInteractable boutons;
@@ -50,7 +61,8 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField] private SoundTrigger[] sound;
 
-
+    public InputSystemUIInputModule UIInputModule;
+    
 
 
     // Start is called before the first frame update
@@ -58,15 +70,23 @@ public class PlayerInteraction : MonoBehaviour
     {   
         m_input = GetComponent<PlayerInput>();
         m_interagirAction = m_input.actions["Interagir"];
+        m_InventaireAction = m_input.actions["Inventaire"];
+
+        
+
+        //m_inputUI = GetComponent<DefaultInputActions>();
+        m_submitAction = UIInputModule.actionsAsset.FindAction("Submit");
+
         cam = Camera.main;
         foreach(SoundTrigger s in sound) { GetComponentInChildren<AudioSource>(); }
+        
     }
 
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-      
+        //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        
     }
 
 
@@ -75,11 +95,15 @@ public class PlayerInteraction : MonoBehaviour
     private void OnEnable()
     {
         m_interagirAction.performed += Interaction;
+        m_InventaireAction.performed += AffichageUI;
+        m_submitAction.performed += SubmitAction;
     }
 
     private void OnDisable() 
     {
         m_interagirAction.performed -= Interaction;
+        m_InventaireAction.performed -= AffichageUI;
+        m_submitAction.performed -= SubmitAction;
     }
 
 
@@ -88,6 +112,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (!Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit, m_maxDistance, m_layerMask)) return;
         Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward)* hit.distance, Color.yellow);
+
 
         if (!hit.transform.TryGetComponent(out IUsable interactable)) return;
         interactable.Use();
@@ -133,9 +158,19 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    
+    void AffichageUI(InputAction.CallbackContext callbackContext)
+    {
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
+        //if (EventSystem.current.IsPointerOverGameObject()) return;
 
-   
+
+    }
+
+    void SubmitAction(InputAction.CallbackContext callbackContext)
+    {   
+        if(goodZone && m_submitAction.triggered)
+        Debug.Log("la porte s'ouvre");
+    }
     void PorteMoyenne()
     {
         if (sound[0].hasBeenListened && sound[1].hasBeenListened)
@@ -174,7 +209,7 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-      void PorteDifficileB()
+    void PorteDifficileB()
     {
         
 
@@ -191,6 +226,19 @@ public class PlayerInteraction : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        other = item.parentObject.GetComponent<BoxCollider>();
 
+        if (other)
+        {
+            goodZone = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        goodZone = false;
+    }
 
 }

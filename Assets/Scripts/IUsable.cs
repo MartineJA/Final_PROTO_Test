@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 /// <summary>
 /// Interface pour allumer les boutons
+/// Object INTERACTABLE
 /// </summary>
 /// 
 

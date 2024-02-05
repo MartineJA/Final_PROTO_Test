@@ -46,7 +46,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interagir "",
+                    ""name"": ""Interagir"",
                     ""type"": ""Button"",
                     ""id"": ""13af2d2a-f785-4a67-82f6-372d8a5d85d4"",
                     ""expectedControlType"": ""Button"",
@@ -55,7 +55,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Hit"",
+                    ""name"": ""Inventaire"",
                     ""type"": ""Button"",
                     ""id"": ""03ebaa12-9bd2-417f-95f6-5e943ebd0205"",
                     ""expectedControlType"": ""Button"",
@@ -121,61 +121,6 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""0ae06ccb-ef57-47a7-bc1f-010a52964623"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""cc8daa2d-9b41-4170-8fa0-ef2fdcdc2c9b"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""dd95c409-5c76-495b-bcda-96b4b4f95b19"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""373cbdf5-9f59-4571-acf3-bab380dda85b"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""4dfc88ec-4b1f-4903-9505-13461ac15387"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""b99c41d8-724a-46d8-a417-e4ee60cfa899"",
                     ""path"": ""<Gamepad>/leftStick"",
@@ -211,11 +156,11 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""aa5a9f39-3a4f-4391-a6db-793765934980"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interagir "",
+                    ""action"": ""Interagir"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -226,29 +171,29 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interagir "",
+                    ""action"": ""Interagir"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""30a75072-4078-4477-bed5-68b4173e190b"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Hit"",
+                    ""action"": ""Inventaire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""8aee896d-da15-4221-9dc6-7db73598c73a"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Hit"",
+                    ""action"": ""Inventaire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -261,8 +206,8 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
         m_Default_Look = m_Default.FindAction("Look", throwIfNotFound: true);
-        m_Default_Interagir = m_Default.FindAction("Interagir ", throwIfNotFound: true);
-        m_Default_Hit = m_Default.FindAction("Hit", throwIfNotFound: true);
+        m_Default_Interagir = m_Default.FindAction("Interagir", throwIfNotFound: true);
+        m_Default_Inventaire = m_Default.FindAction("Inventaire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -327,7 +272,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Move;
     private readonly InputAction m_Default_Look;
     private readonly InputAction m_Default_Interagir;
-    private readonly InputAction m_Default_Hit;
+    private readonly InputAction m_Default_Inventaire;
     public struct DefaultActions
     {
         private @PlayerGame m_Wrapper;
@@ -335,7 +280,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Default_Move;
         public InputAction @Look => m_Wrapper.m_Default_Look;
         public InputAction @Interagir => m_Wrapper.m_Default_Interagir;
-        public InputAction @Hit => m_Wrapper.m_Default_Hit;
+        public InputAction @Inventaire => m_Wrapper.m_Default_Inventaire;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -354,9 +299,9 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
             @Interagir.started += instance.OnInteragir;
             @Interagir.performed += instance.OnInteragir;
             @Interagir.canceled += instance.OnInteragir;
-            @Hit.started += instance.OnHit;
-            @Hit.performed += instance.OnHit;
-            @Hit.canceled += instance.OnHit;
+            @Inventaire.started += instance.OnInventaire;
+            @Inventaire.performed += instance.OnInventaire;
+            @Inventaire.canceled += instance.OnInventaire;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -370,9 +315,9 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
             @Interagir.started -= instance.OnInteragir;
             @Interagir.performed -= instance.OnInteragir;
             @Interagir.canceled -= instance.OnInteragir;
-            @Hit.started -= instance.OnHit;
-            @Hit.performed -= instance.OnHit;
-            @Hit.canceled -= instance.OnHit;
+            @Inventaire.started -= instance.OnInventaire;
+            @Inventaire.performed -= instance.OnInventaire;
+            @Inventaire.canceled -= instance.OnInventaire;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -395,6 +340,6 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteragir(InputAction.CallbackContext context);
-        void OnHit(InputAction.CallbackContext context);
+        void OnInventaire(InputAction.CallbackContext context);
     }
 }
