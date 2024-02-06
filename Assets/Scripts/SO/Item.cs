@@ -18,14 +18,12 @@ public class Item : ScriptableObject
     
 
     public virtual void Use()
-    {
-    
-
-        Debug.Log(name + "  ne peut pas s'utiliser ici");
-        
-   
-
+    {  
+        Debug.Log("using " + name);       
     }
 
-   
+   public virtual void RemoveUse()
+    {
+        Inventaire.instance.Remove(this);
+    }
 }

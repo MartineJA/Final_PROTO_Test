@@ -169,7 +169,13 @@ public class PlayerInteraction : MonoBehaviour
     void SubmitAction(InputAction.CallbackContext callbackContext)
     {   
         if(goodZone && m_submitAction.triggered)
-        Debug.Log("la porte s'ouvre");
+        {
+            Debug.Log("la porte s'ouvre");
+            item.RemoveUse();
+
+        }
+        
+        
     }
     void PorteMoyenne()
     {
@@ -240,5 +246,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         goodZone = false;
     }
+
+
 
 }
