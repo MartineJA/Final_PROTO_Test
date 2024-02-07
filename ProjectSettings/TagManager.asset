@@ -18,6 +18,9 @@ TagManager:
   - Clue
   - Grabable
   - Parent
+  - Alecta
+  - Tisiphone
+  - Megaira
   layers:
   - Default
   - TransparentFX
@@ -30,9 +33,9 @@ TagManager:
   - Walls
   - Transparent
   - Grabable
-  - 
-  - 
-  - 
+  - Alecta
+  - Megaira
+  - Tisiphone
   - 
   - 
   - 

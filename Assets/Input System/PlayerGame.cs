@@ -62,6 +62,15 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeView"",
+                    ""type"": ""Button"",
+                    ""id"": ""2578681e-d63d-4d8c-a0f6-434be4ec4ed9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
                     ""action"": ""Inventaire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3001271c-1e1e-48a1-8162-954303476232"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
         m_Default_Look = m_Default.FindAction("Look", throwIfNotFound: true);
         m_Default_Interagir = m_Default.FindAction("Interagir", throwIfNotFound: true);
         m_Default_Inventaire = m_Default.FindAction("Inventaire", throwIfNotFound: true);
+        m_Default_ChangeView = m_Default.FindAction("ChangeView", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Look;
     private readonly InputAction m_Default_Interagir;
     private readonly InputAction m_Default_Inventaire;
+    private readonly InputAction m_Default_ChangeView;
     public struct DefaultActions
     {
         private @PlayerGame m_Wrapper;
@@ -281,6 +303,7 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Default_Look;
         public InputAction @Interagir => m_Wrapper.m_Default_Interagir;
         public InputAction @Inventaire => m_Wrapper.m_Default_Inventaire;
+        public InputAction @ChangeView => m_Wrapper.m_Default_ChangeView;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +325,9 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
             @Inventaire.started += instance.OnInventaire;
             @Inventaire.performed += instance.OnInventaire;
             @Inventaire.canceled += instance.OnInventaire;
+            @ChangeView.started += instance.OnChangeView;
+            @ChangeView.performed += instance.OnChangeView;
+            @ChangeView.canceled += instance.OnChangeView;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -318,6 +344,9 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
             @Inventaire.started -= instance.OnInventaire;
             @Inventaire.performed -= instance.OnInventaire;
             @Inventaire.canceled -= instance.OnInventaire;
+            @ChangeView.started -= instance.OnChangeView;
+            @ChangeView.performed -= instance.OnChangeView;
+            @ChangeView.canceled -= instance.OnChangeView;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -341,5 +370,6 @@ public partial class @PlayerGame: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteragir(InputAction.CallbackContext context);
         void OnInventaire(InputAction.CallbackContext context);
+        void OnChangeView(InputAction.CallbackContext context);
     }
 }

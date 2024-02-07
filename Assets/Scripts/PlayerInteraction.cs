@@ -28,6 +28,9 @@ public class PlayerInteraction : MonoBehaviour
 
     IUsable m_target;
 
+    public GameObject volume;
+    public GameObject cube;
+
 
     PlayerInput m_input;
     InputAction m_interagirAction;
@@ -36,19 +39,24 @@ public class PlayerInteraction : MonoBehaviour
     DefaultInputActions m_inputUI;
     InputAction m_submitAction;
 
+    InputAction m_changeView;
+
     RaycastHit hit;
 
     Camera cam;
 
     public GameObject inventoryUI;
+    public GameObject IRcam;
 
     [SerializeField]
     private Item item;
 
 
+
+
     bool porte2B = false;
     bool porte2A = false;
-    bool goodZone;
+    public bool goodZone;
 
     [Header("Liste des boutons par pièce")]
     [SerializeField] private ObjetInteractable boutons;
@@ -71,7 +79,7 @@ public class PlayerInteraction : MonoBehaviour
         m_input = GetComponent<PlayerInput>();
         m_interagirAction = m_input.actions["Interagir"];
         m_InventaireAction = m_input.actions["Inventaire"];
-
+        m_changeView = m_input.actions["ChangeView"];
         
 
         //m_inputUI = GetComponent<DefaultInputActions>();
@@ -97,6 +105,7 @@ public class PlayerInteraction : MonoBehaviour
         m_interagirAction.performed += Interaction;
         m_InventaireAction.performed += AffichageUI;
         m_submitAction.performed += SubmitAction;
+        m_changeView.performed += ChangeView;
     }
 
     private void OnDisable() 
@@ -104,6 +113,7 @@ public class PlayerInteraction : MonoBehaviour
         m_interagirAction.performed -= Interaction;
         m_InventaireAction.performed -= AffichageUI;
         m_submitAction.performed -= SubmitAction;
+        m_changeView.performed -= ChangeView;
     }
 
 
@@ -177,6 +187,19 @@ public class PlayerInteraction : MonoBehaviour
         
         
     }
+
+    void ChangeView(InputAction.CallbackContext callbackContext)
+    {
+        //volume.SetActive(!volume.activeSelf);
+        IRcam.SetActive(!IRcam.activeSelf);
+        if (cube != null) cube.SetActive(!cube.activeSelf);
+        
+
+
+    }
+
+
+
     void PorteMoyenne()
     {
         if (sound[0].hasBeenListened && sound[1].hasBeenListened)
@@ -235,11 +258,9 @@ public class PlayerInteraction : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         other = item.parentObject.GetComponent<BoxCollider>();
+        if(other)
+        goodZone = true;
 
-        if (other)
-        {
-            goodZone = true;
-        }
     }
 
     private void OnTriggerExit(Collider other)
