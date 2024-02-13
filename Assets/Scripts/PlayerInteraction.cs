@@ -49,14 +49,15 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject IRcam;
 
     [SerializeField]
-    private Item item;
+    private Item[] item;
 
+    //BoxCollider[] boxCollider;
 
 
 
     bool porte2B = false;
     bool porte2A = false;
-    public bool goodZone;
+    public bool[] goodZone;
 
     [Header("Liste des boutons par pièce")]
     [SerializeField] private ObjetInteractable boutons;
@@ -87,7 +88,13 @@ public class PlayerInteraction : MonoBehaviour
 
         cam = Camera.main;
         foreach(SoundTrigger s in sound) { GetComponentInChildren<AudioSource>(); }
-        
+
+        /*for (int i = 0; i < item.Length; i++)
+        {
+            boxCollider[i] = item[i].parentObject.GetComponent<BoxCollider>();
+        }*/
+
+
     }
 
 
@@ -178,14 +185,33 @@ public class PlayerInteraction : MonoBehaviour
 
     void SubmitAction(InputAction.CallbackContext callbackContext)
     {   
-        if(goodZone && m_submitAction.triggered)
+       
+        if(goodZone[0] && m_submitAction.triggered)
         {
-            Debug.Log("la porte s'ouvre");
-            item.RemoveUse();
+            Debug.Log("la porte " + item[0].name + " s'ouvre");
+            item[0].RemoveUse();
 
         }
-        
-        
+        if (goodZone[1] && m_submitAction.triggered)
+        {
+            Debug.Log("la porte " + item[1].name + " s'ouvre");
+            item[1].RemoveUse();
+
+        }
+        if (goodZone[2] && m_submitAction.triggered)
+        {
+            Debug.Log("la porte " + item[2].name + " s'ouvre");
+            item[2].RemoveUse();
+
+        }
+        if (goodZone[3] && m_submitAction.triggered)
+        {
+            Debug.Log("la porte " + item[3].name + " s'ouvre");
+            item[3].RemoveUse();
+
+        }
+
+
     }
 
     void ChangeView(InputAction.CallbackContext callbackContext)
@@ -257,15 +283,21 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other = item.parentObject.GetComponent<BoxCollider>();
-        if(other)
-        goodZone = true;
+
+        if (other.CompareTag("pink")) goodZone[0] = true;
+        if (other.CompareTag("turquoise")) goodZone[1] = true;
+        if (other.CompareTag("yellow")) goodZone[2] = true;
+        if (other.CompareTag("orange")) goodZone[3] = true;
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        goodZone = false;
+        goodZone[0] = false;
+        goodZone[1] = false;
+        goodZone[2] = false;
+        goodZone[3] = false;
+
     }
 
 

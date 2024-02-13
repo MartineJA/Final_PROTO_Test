@@ -21,6 +21,10 @@ TagManager:
   - Alecta
   - Tisiphone
   - Megaira
+  - orange
+  - pink
+  - turquoise
+  - yellow
   layers:
   - Default
   - TransparentFX
