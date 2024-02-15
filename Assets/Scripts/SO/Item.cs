@@ -14,16 +14,17 @@ public class Item : ScriptableObject
     public string description;
 
     public GameObject parentObject;
-
+    //public bool used = false;
     
 
     public virtual void Use()
     {  
-        Debug.Log("using " + name);       
-    }
+        Debug.Log("using " + name);
 
-   public virtual void RemoveUse()
+    }
+    public virtual void RemoveUse()
     {
         Inventaire.instance.Remove(this);
     }
+
 }

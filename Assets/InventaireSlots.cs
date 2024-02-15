@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Quand on clique sur un objet de l'inventaire
+/// 
+/// </summary>
 public class InventaireSlots : MonoBehaviour
 {
 
@@ -28,6 +32,9 @@ public class InventaireSlots : MonoBehaviour
         if(item != null)
         {
             item.Use();
+            
         }
     }
+
+
 }

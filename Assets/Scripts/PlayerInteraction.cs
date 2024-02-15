@@ -44,6 +44,7 @@ public class PlayerInteraction : MonoBehaviour
     RaycastHit hit;
 
     Camera cam;
+    public CinemachineVirtualCamera vcam;
 
     public GameObject inventoryUI;
     public GameObject IRcam;
@@ -51,7 +52,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private Item[] item;
 
-    //BoxCollider[] boxCollider;
+    [SerializeField]
+    BoxCollider[] boxCollider;
 
 
 
@@ -89,10 +91,7 @@ public class PlayerInteraction : MonoBehaviour
         cam = Camera.main;
         foreach(SoundTrigger s in sound) { GetComponentInChildren<AudioSource>(); }
 
-        /*for (int i = 0; i < item.Length; i++)
-        {
-            boxCollider[i] = item[i].parentObject.GetComponent<BoxCollider>();
-        }*/
+ 
 
 
     }
@@ -101,7 +100,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-        
+        DropStatue();
     }
 
 
@@ -111,7 +110,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         m_interagirAction.performed += Interaction;
         m_InventaireAction.performed += AffichageUI;
-        m_submitAction.performed += SubmitAction;
+        //m_submitAction.performed += SubmitAction;
         m_changeView.performed += ChangeView;
     }
 
@@ -119,7 +118,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         m_interagirAction.performed -= Interaction;
         m_InventaireAction.performed -= AffichageUI;
-        m_submitAction.performed -= SubmitAction;
+        //m_submitAction.performed -= SubmitAction;
         m_changeView.performed -= ChangeView;
     }
 
@@ -183,28 +182,29 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    void SubmitAction(InputAction.CallbackContext callbackContext)
+    /*void SubmitAction(InputAction.CallbackContext callbackContext)
     {   
        
-        if(goodZone[0] && m_submitAction.triggered)
+        if(goodZone[0] && item[0].used)
         {
+           
             Debug.Log("la porte " + item[0].name + " s'ouvre");
             item[0].RemoveUse();
 
         }
-        if (goodZone[1] && m_submitAction.triggered)
+        if (goodZone[1] && item[1].used)
         {
             Debug.Log("la porte " + item[1].name + " s'ouvre");
             item[1].RemoveUse();
 
         }
-        if (goodZone[2] && m_submitAction.triggered)
+        if (goodZone[2] && item[2].used)
         {
             Debug.Log("la porte " + item[2].name + " s'ouvre");
             item[2].RemoveUse();
 
         }
-        if (goodZone[3] && m_submitAction.triggered)
+        if (goodZone[3] && item[3].used)
         {
             Debug.Log("la porte " + item[3].name + " s'ouvre");
             item[3].RemoveUse();
@@ -212,7 +212,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
 
-    }
+    }*/
 
     void ChangeView(InputAction.CallbackContext callbackContext)
     {
@@ -224,7 +224,39 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
+    void DropStatue() //on n'enregistre nulle part l'objet selectionné dans l'inventaire
+    {
+        if(goodZone[0] && m_submitAction.triggered)
+        {
+           
+                item[0].Use();
+                item[0].RemoveUse();         
+        }
 
+        if (goodZone[1] && m_submitAction.triggered)
+        {
+            
+                item[1].Use();
+                item[1].RemoveUse();
+
+        }
+        if (goodZone[2] && m_submitAction.triggered)
+        {
+           
+                item[2].Use();
+                item[2].RemoveUse();
+
+        }
+        if (goodZone[3] && m_submitAction.triggered)
+        {
+            
+                item[3].Use();
+                item[3].RemoveUse();
+
+        }
+
+
+    }
 
     void PorteMoyenne()
     {
@@ -245,8 +277,6 @@ public class PlayerInteraction : MonoBehaviour
         else Debug.Log("vous devriez écouter autour de vous");
 
     }
-
-
     void PorteDifficileA()
     {
 
@@ -263,7 +293,6 @@ public class PlayerInteraction : MonoBehaviour
 
 
     }
-
     void PorteDifficileB()
     {
         
@@ -280,23 +309,22 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("pink")) goodZone[0] = true;
-        if (other.CompareTag("turquoise")) goodZone[1] = true;
-        if (other.CompareTag("yellow")) goodZone[2] = true;
-        if (other.CompareTag("orange")) goodZone[3] = true;
+        if (other == boxCollider[0]) goodZone[0] = true;
+        if (other == boxCollider[1]) goodZone[1] = true;
+        if (other == boxCollider[2]) goodZone[2] = true; 
+        if (other == boxCollider[3]) goodZone[3] = true;
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        goodZone[0] = false;
-        goodZone[1] = false;
-        goodZone[2] = false;
-        goodZone[3] = false;
+        if (other.CompareTag("pink")) goodZone[0] = false;
+        if (other.CompareTag("turquoise")) goodZone[1] = false;
+        if (other.CompareTag("yellow")) goodZone[2] = false; 
+        if (other.CompareTag("orange")) goodZone[3] = false;
 
     }
 
